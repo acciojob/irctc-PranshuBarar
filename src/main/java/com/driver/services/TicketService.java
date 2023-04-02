@@ -37,7 +37,7 @@ public class TicketService {
         //In case there are insufficient tickets
         //throw new Exception("Less tickets are available");
 
-        //Incase the train doesn't pass through the requested stations
+        //In case the train doesn't pass through the requested stations
         //throw new Exception("Invalid stations");
         String route = train.getRoute();
         String [] routeArr = route.split(", ");
@@ -64,14 +64,17 @@ public class TicketService {
         ticket.setFromStation(bookTicketEntryDto.getFromStation());
         ticket.setToStation(bookTicketEntryDto.getToStation());
         ticket.setTrain(train);
-        Ticket updatedTicket = ticketRepository.save(ticket);
 
-        train.getBookedTickets().add(updatedTicket);
-        trainRepository.save(train);
+
 
         Passenger passenger = passengerRepository.findById(bookTicketEntryDto.getBookingPersonId()).get();
         passenger.getBookedTickets().add(ticket);
         passengerRepository.save(passenger);
+
+        Ticket updatedTicket = ticketRepository.save(ticket);
+
+        train.getBookedTickets().add(updatedTicket);
+        trainRepository.save(train);
 
 
         return updatedTicket.getTicketId();

@@ -125,7 +125,7 @@ public class TrainService {
             String route = train.getRoute();
             String[]routeArr = route.split(", ");
             if(Arrays.stream(routeArr).anyMatch(thisRoute -> thisRoute.equals(station.name()))){
-                //if we are inside this if block it means train is certainly going to pass
+                //if we are inside this "if" block it means train is certainly going to pass
                 //from the given station
                 //But now we need to check that the train will pass at what TIME...and if that
                 //time falls between the time bracket provided to us, we will add the trainId of this
